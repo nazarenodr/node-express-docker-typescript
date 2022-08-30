@@ -1,0 +1,22 @@
+version: '3.6'
+services:
+  backend-dev:
+    build: ./backend
+    command: sh -c "npm i -g ts-node && npm run dev"
+    restart: always
+    environment:
+      PORT: 4005
+    ports:
+      - "4005:4005"
+  db:
+    image: mysql/mysql-server
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: project
+      MYSQL_DATABASE: project
+      MYSQL_USER: project
+      MYSQL_PASSWORD: project
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./database:/var/lib/mysql
